@@ -25,27 +25,25 @@ macro(example_targets)
 
   add_executable(int32_talker_c__${rmw_implementation} src/int32_talker.c)
   ament_target_dependencies(int32_talker_c__${rmw_implementation}
-    "rcl"
-    "${rmw_implementation}"
+    "rcl${target_suffix}"
     "std_msgs"
   )
 
   add_executable(int32_listener_c__${rmw_implementation} src/int32_listener.c)
   ament_target_dependencies(int32_listener_c__${rmw_implementation}
-    "rcl"
-    "${rmw_implementation}"
+    "rcl${target_suffix}"
     "std_msgs"
   )
 
   add_executable(talker_c__${rmw_implementation} src/talker.c)
   ament_target_dependencies(talker_c__${rmw_implementation}
-    "rcl"
+    "rcl${target_suffix}"
     "std_msgs"
   )
 
   add_executable(listener_c__${rmw_implementation} src/listener.c)
   ament_target_dependencies(listener_c__${rmw_implementation}
-    "rcl"
+    "rcl${target_suffix}"
     "std_msgs"
   )
 
