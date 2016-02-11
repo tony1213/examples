@@ -13,13 +13,16 @@ find_package(rmw REQUIRED)
 find_package(rmw_implementation_cmake REQUIRED)
 find_package(std_msgs REQUIRED)
 
-ament_package()
 
 ##
 ## Examples of Publish/Subscribe with Topics
 ##
 
 macro(example_targets)
+  if(NOT "${target_suffix} " STREQUAL " ")
+    get_rcl_information("${rmw_implementation}" "rcl${target_suffix}")
+  endif()
+
   add_executable(int32_talker_c__${rmw_implementation} src/int32_talker.c)
   ament_target_dependencies(int32_talker_c__${rmw_implementation}
     "rcl"
@@ -37,14 +40,12 @@ macro(example_targets)
   add_executable(talker_c__${rmw_implementation} src/talker.c)
   ament_target_dependencies(talker_c__${rmw_implementation}
     "rcl"
-    "${rmw_implementation}"
     "std_msgs"
   )
 
   add_executable(listener_c__${rmw_implementation} src/listener.c)
   ament_target_dependencies(listener_c__${rmw_implementation}
     "rcl"
-    "${rmw_implementation}"
     "std_msgs"
   )
 
@@ -60,3 +61,4 @@ endmacro()
 
 call_for_each_rmw_implementation(example_targets)
 
+ament_package()
