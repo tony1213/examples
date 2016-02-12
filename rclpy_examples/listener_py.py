@@ -6,7 +6,7 @@ from std_msgs.msg import String
 
 
 def chatter_callback(msg):
-    print("I heard: [%s]" % msg.data)
+    print('I heard: [%s]' % msg.data)
 
 def main(args=None):
     if args is None:
@@ -14,9 +14,9 @@ def main(args=None):
 
     rclpy.init(args)
 
-    node = rclpy.create_node("listener")
+    node = rclpy.create_node('listener')
 
-    sub = node.create_subscription(String, "chatter", chatter_callback, qos_profile_default)
+    sub = node.create_subscription(String, 'chatter', chatter_callback, qos_profile_default)
 
     rclpy.spin(node)
 

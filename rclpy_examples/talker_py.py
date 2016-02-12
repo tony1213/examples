@@ -12,17 +12,17 @@ def main(args=None):
 
     rclpy.init(args)
 
-    node = rclpy.create_node("talker")
+    node = rclpy.create_node('talker')
 
-    chatter_pub = node.create_publisher(String, "chatter", qos_profile_default)
+    chatter_pub = node.create_publisher(String, 'chatter', qos_profile_default)
 
     msg = String()
 
     i = 1
     while True:
-      msg.data = "Hello World: {0}".format(i)
+      msg.data = 'Hello World: {0}'.format(i)
       i += 1
-      print("Publishing: '{0}'".format(msg.data))
+      print('Publishing: "{0}"'.format(msg.data))
       chatter_pub.publish(msg)
       sleep(1)
 
