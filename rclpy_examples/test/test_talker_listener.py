@@ -2,18 +2,18 @@ import os
 import sys
 from multiprocessing import Process
 from multiprocessing import Queue
-from unittest import TestCase
 
-from listener_py import main as listener_main
-from talker_py import main as talker_main
-
-os.environ['OSPL_VERBOSITY'] = '8'  # 8 = OS_NONE
 
 def talker_process(queue):
+    from talker_py import main as talker_main
+
     sys.stdout = queue
     talker_main()
 
+
 def listener_process(queue):
+    from listener_py import main as listener_main
+
     sys.stdout = queue
     listener_main()
 
@@ -33,6 +33,7 @@ class QueueHandler:
 
 
 def test_talker_listener():
+    os.environ['OSPL_VERBOSITY'] = '8'  # 8 = OS_NONE
     queue_handler = QueueHandler()
     talker = Process(target=talker_process, args=(queue_handler,))
     listener = Process(target=listener_process, args=(queue_handler,))

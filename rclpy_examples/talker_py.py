@@ -20,11 +20,11 @@ def main(args=None):
 
     i = 1
     while True:
-      msg.data = 'Hello World: {0}'.format(i)
-      i += 1
-      print('Publishing: "{0}"'.format(msg.data))
-      chatter_pub.publish(msg)
-      sleep(1)
+        msg.data = 'Hello World: {0}'.format(i)
+        i += 1
+        print('Publishing: "{0}"'.format(msg.data))
+        chatter_pub.publish(msg)
+        sleep(1)
 
 if __name__ == '__main__':
     main()
