@@ -19,8 +19,6 @@ setup(
     ],
     description='Package containing examples of how to use the rclpy API.',
     license='Apache License, Version 2.0',
-    test_suite='nose.collector',
-    test_require=['nose'],
     entry_points={
         'console_scripts': [
             'listener_py = listener_py:main',
