@@ -4,6 +4,7 @@ from setuptools import setup
 setup(
     name='rclpy_examples',
     version='0.0.0',
+    packages=[],
     py_modules=['listener_py', 'talker_py'],
     install_requires=['setuptools'],
     author='Esteve Fernandez',
