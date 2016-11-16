@@ -30,14 +30,42 @@ void handle_add_two_ints(
   response->sum = request->a + request->b;
 }
 
+void handle_add_two_ints2(
+  const std::shared_ptr<rmw_request_id_t> request_header,
+  const std::shared_ptr<example_interfaces::srv::AddTwoInts::Request> request,
+  std::shared_ptr<example_interfaces::srv::AddTwoInts::Response> response,
+  int i)
+{
+  (void)request_header;
+  std::cout << "Incoming request" << std::endl;
+  std::cout << "a: " << request->a << " b: " << request->b << std::endl;
+  response->sum = request->a + request->b;
+}
+
 int main(int argc, char ** argv)
 {
   rclcpp::init(argc, argv);
 
   auto node = rclcpp::Node::make_shared("add_two_ints_server");
 
-  node->create_service<example_interfaces::srv::AddTwoInts>("add_two_ints", handle_add_two_ints);
+  std::function<void(const std::shared_ptr<rmw_request_id_t>,
+    const std::shared_ptr<example_interfaces::srv::AddTwoInts::Request>,
+    std::shared_ptr<example_interfaces::srv::AddTwoInts::Response>)> fcn;
+  fcn = std::bind(handle_add_two_ints, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
+  node->create_service<example_interfaces::srv::AddTwoInts>("add_two_ints", fcn);
+
+  // the next block does not compile
+  {
+  int i = 1;
+  std::function<void(const std::shared_ptr<rmw_request_id_t>,
+    const std::shared_ptr<example_interfaces::srv::AddTwoInts::Request>,
+    std::shared_ptr<example_interfaces::srv::AddTwoInts::Response>,
+    int)> fcn2;
+  fcn2 = std::bind(handle_add_two_ints2, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, i);
+
+  node->create_service<example_interfaces::srv::AddTwoInts>("add_two_ints", fcn2);
+  }
   rclcpp::spin(node);
 
   return 0;
