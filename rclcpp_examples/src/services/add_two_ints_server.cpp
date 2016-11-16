@@ -56,16 +56,16 @@ int main(int argc, char ** argv)
   node->create_service<example_interfaces::srv::AddTwoInts>("add_two_ints", fcn);
 
   // the next block does not compile
-  {
-  int i = 1;
-  std::function<void(const std::shared_ptr<rmw_request_id_t>,
-    const std::shared_ptr<example_interfaces::srv::AddTwoInts::Request>,
-    std::shared_ptr<example_interfaces::srv::AddTwoInts::Response>,
-    int)> fcn2;
-  fcn2 = std::bind(handle_add_two_ints2, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, i);
+  //{
+  //int i = 1;
+  //std::function<void(const std::shared_ptr<rmw_request_id_t>,
+  //  const std::shared_ptr<example_interfaces::srv::AddTwoInts::Request>,
+  //  std::shared_ptr<example_interfaces::srv::AddTwoInts::Response>,
+  //  int)> fcn2;
+  //fcn2 = std::bind(handle_add_two_ints2, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, i);
 
-  node->create_service<example_interfaces::srv::AddTwoInts>("add_two_ints", fcn2);
-  }
+  //node->create_service<example_interfaces::srv::AddTwoInts>("add_two_ints", fcn2);
+  //}
   rclcpp::spin(node);
 
   return 0;
