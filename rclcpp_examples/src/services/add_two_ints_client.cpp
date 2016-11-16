@@ -36,10 +36,36 @@ example_interfaces::srv::AddTwoInts_Response::SharedPtr send_request(
   }
 }
 
+class MyClient : public rclcpp::node::Node
+{
+public:
+  MyClient(const std::string& node_name):
+    rclcpp::node::Node(node_name)
+  {
+    // This code leads to a bad weak_ptr exception
+    // Work around is to put it into an init function
+    //client_ = this->create_client<example_interfaces::srv::AddTwoInts>("add_two_ints_client");
+  }
+
+  void init()
+  {
+    client_ = this->create_client<example_interfaces::srv::AddTwoInts>("add_two_ints_client");
+  }
+private:
+  std::shared_ptr<rclcpp::client::Client<example_interfaces::srv::AddTwoInts>> client_;
+};
+
 int main(int argc, char ** argv)
 {
   rclcpp::init(argc, argv);
 
+  auto my_client_node = std::make_shared<MyClient>("my_service_client");
+  my_client_node->init();
+  rclcpp::executors::SingleThreadedExecutor exe;
+  exe.add_node(my_client_node);
+
+  exe.spin();
+  /*
   auto node = rclcpp::Node::make_shared("add_two_ints_client");
 
   auto client = node->create_client<example_interfaces::srv::AddTwoInts>("add_two_ints");
@@ -65,5 +91,6 @@ int main(int argc, char ** argv)
   }
 
   rclcpp::shutdown();
+  */
   return 0;
 }
