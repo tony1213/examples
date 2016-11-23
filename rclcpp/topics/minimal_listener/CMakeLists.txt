@@ -16,8 +16,12 @@ ament_target_dependencies(listener_member_function rclcpp std_msgs)
 add_executable(listener_without_subclass listener_without_subclass.cpp)
 ament_target_dependencies(listener_without_subclass rclcpp std_msgs)
 
+add_executable(bugged_listener_example bugged_listener_example.cpp)
+ament_target_dependencies(bugged_listener_example rclcpp std_msgs)
+
 install(TARGETS listener_lambda
                 listener_member_function
                 listener_without_subclass
+                bugged_listener_example
         DESTINATION bin)
 ament_package()

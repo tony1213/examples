@@ -16,8 +16,12 @@ ament_target_dependencies(talker_timer_member_function rclcpp std_msgs)
 add_executable(talker_without_subclass talker_without_subclass.cpp)
 ament_target_dependencies(talker_without_subclass rclcpp std_msgs)
 
+add_executable(bugged_talker_example bugged_talker_example.cpp)
+ament_target_dependencies(bugged_talker_example rclcpp std_msgs)
+
 install(TARGETS talker_timer_lambda
                 talker_timer_member_function
                 talker_without_subclass
+                bugged_talker_example
         DESTINATION bin)
 ament_package()
