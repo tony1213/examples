@@ -1,16 +1,12 @@
 from setuptools import setup
 
 setup(
-    name='rclpy_examples',
+    name='security_examples',
     version='0.0.0',
     packages=[],
     py_modules=[
         'topics.listener_insecure_py', 'topics.talker_secure_py',
-        'topics.listener_secure_py',
-        'topics.listener_py', 'topics.talker_py',
-        'topics.listener_qos_py', 'topics.talker_qos_py',
-        'services.add_two_ints_client_py', 'services.add_two_ints_client_async_py',
-        'services.add_two_ints_server_py'],
+        'topics.listener_secure_py'],
     install_requires=['setuptools'],
     author='Esteve Fernandez',
     author_email='esteve@osrfoundation.org',
@@ -31,13 +27,6 @@ setup(
             'listener_insecure_py = topics.listener_insecure_py:main',
             'listener_secure_py = topics.listener_secure_py:main',
             'talker_secure_py = topics.talker_secure_py:main',
-            'listener_py = topics.listener_py:main',
-            'talker_py = topics.talker_py:main',
-            'listener_qos_py = topics.listener_qos_py:main',
-            'talker_qos_py = topics.talker_qos_py:main',
-            'add_two_ints_client_py = services.add_two_ints_client_py:main',
-            'add_two_ints_client_async_py = services.add_two_ints_client_async_py:main',
-            'add_two_ints_server_py = services.add_two_ints_server_py:main'
         ],
     },
 )
